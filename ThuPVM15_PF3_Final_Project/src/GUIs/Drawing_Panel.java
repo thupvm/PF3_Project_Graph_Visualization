@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ import Constants.Constants;
 import Constants.Statics;
 import Models.Graph;
 import Models.Node;
+import Models.Spanning_Tree;
 import Services.Geometry_Services;
 
 import java.awt.event.MouseAdapter;
@@ -42,7 +44,7 @@ public class Drawing_Panel extends JPanel {
 
 					graph_nodes.add(new_node);
 
-					graph.display();
+//					graph.display();
 
 					repaint();
 				} else if (Statics.is_adding_edge == true) {
@@ -80,7 +82,17 @@ public class Drawing_Panel extends JPanel {
 	}
 
 	private void draw_all_element(Graphics g) {
+		Set<Integer> node_in_spt = new HashSet<>();
+		double[][] edge_in_spt = null;
+		if (Statics.is_finding_spanning_tree) {
+
+			Spanning_Tree SPT = Statics.current_spanning_tree;
+			node_in_spt = SPT.getNodes_id();
+			edge_in_spt = SPT.getEdges();
+		}
+
 		Graphics2D g2d = (Graphics2D) g;
+		int radius = Constants.node_radius / 2;
 		g2d.setColor(Color.BLACK);
 		this.setBackground(Color.WHITE);
 
@@ -89,8 +101,13 @@ public class Drawing_Panel extends JPanel {
 		for (Node node : current_graph_nodes) {
 			if (node.getID() == Statics.selected_node_id)
 				g2d.setColor(Color.RED);
-			g2d.fillOval((int) Math.round(node.getXP()), (int) Math.round(node.getYP()), Constants.node_radius,
-					Constants.node_radius);
+			if (Statics.is_finding_spanning_tree) {
+				if (node_in_spt.contains(node.getID()))
+					g2d.setColor(Color.GREEN);
+			}
+
+			g2d.fillOval((int) Math.round(node.getXP()) - radius, (int) Math.round(node.getYP()) - radius,
+					Constants.node_radius, Constants.node_radius);
 
 			g2d.setColor(Color.BLACK);
 		}
@@ -101,15 +118,18 @@ public class Drawing_Panel extends JPanel {
 
 			while (ite.hasNext()) {
 				Node target_node = current_graph_nodes.get(ite.next());
+				g2d.setColor(Color.BLACK);
+				if (Statics.is_finding_spanning_tree)
+					if (edge_in_spt[node.getID()][target_node.getID()] != -1)
+						g2d.setColor(Color.GREEN);
 				this.draw_edge(g2d, node, target_node);
+				g2d.setColor(Color.BLACK);
 			}
 		}
 	}
 
 	private void draw_edge(Graphics2D g2d, Node from_node, Node to_node) {
-		int radius = Constants.node_radius / 2;
-		g2d.drawLine((int) from_node.getXP() + radius, (int) from_node.getYP() + radius, (int) to_node.getXP() + radius,
-				(int) to_node.getYP() + radius);
+		g2d.drawLine((int) from_node.getXP(), (int) from_node.getYP(), (int) to_node.getXP(), (int) to_node.getYP());
 	}
 
 }

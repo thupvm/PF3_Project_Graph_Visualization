@@ -17,11 +17,15 @@ import javax.swing.JToolBar;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
 
 public class Main_Window {
 
 	private JFrame frame;
-	private JPanel Drawing_Panel;
+	public static JPanel Drawing_Panel;
 	private JPanel Element_Panel;
 	private JPanel Shortest_Path_Panel;
 	private JPanel Spanning_Tree_Panel;
@@ -65,6 +69,7 @@ public class Main_Window {
 		Control_Panel.add(Shortest_Path_Panel);
 		
 		Spanning_Tree_Panel = new Spanning_Tree_Panel();
+		
 		Control_Panel.add(Spanning_Tree_Panel);
 		
 		JPanel null_panel = new JPanel();
@@ -86,6 +91,11 @@ public class Main_Window {
 		mnNewMenu.add(separator);
 		
 		mntmNewMenuItem_1 = new JMenuItem("EXIT");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_1);
 	}
 

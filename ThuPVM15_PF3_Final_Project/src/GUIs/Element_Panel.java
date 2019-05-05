@@ -28,6 +28,8 @@ public class Element_Panel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Statics.is_adding_node = true;
 				Statics.is_adding_edge = false;
+				Statics.is_finding_shortest_path = false;
+				Statics.is_finding_spanning_tree = false;
 				JOptionPane.showMessageDialog(null, "Ready for adding node!");
 			}
 		});
@@ -38,6 +40,8 @@ public class Element_Panel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Statics.is_adding_edge = true;
 				Statics.is_adding_node = false;
+				Statics.is_finding_shortest_path = false;
+				Statics.is_finding_spanning_tree = false;
 				JOptionPane.showMessageDialog(null, "Ready for adding edge!");
 			}
 		});
