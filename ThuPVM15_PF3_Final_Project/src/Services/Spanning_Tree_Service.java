@@ -19,6 +19,8 @@ public class Spanning_Tree_Service {
 	private boolean connected;
 	private int node_num;
 	private double[][] res_distance;
+	
+	private double total_distance;
 
 	public Spanning_Tree_Service(Graph g) {
 		this.target_graph = g;
@@ -32,10 +34,11 @@ public class Spanning_Tree_Service {
 				res_distance[i][j] = -1;
 		}
 		
+		this.total_distance = 0;
+		
 	}
 
 	private void init() {
-		int v;
 		this.d[0] = 0;
 		for (int i = 1; i < this.d.length; i++)
 			this.d[i] = MAXC;
@@ -89,9 +92,8 @@ public class Spanning_Tree_Service {
 					System.out.println("Day ne"+distance_u_v);
 					if (d[v] > distance_u_v) {
 						d[v] = distance_u_v;
-//						res_distance[u][v] = distance_u_v;
-//						res_distance[v][u] = distance_u_v;
 						this.trace[v] = u;
+						this.total_distance += distance_u_v;
 					}
 				}
 			}
@@ -110,7 +112,7 @@ public class Spanning_Tree_Service {
 			w = 0;
 			for (v = 1; v < this.node_num; v++) {
 				System.out.println("Edge: "+v+" "+this.trace[v]);
-				//need change
+				
 				res_distance[v][this.trace[v]] = 0;
 				res_distance[this.trace[v]][v] = 0;
 				res_node_id.add(v);
@@ -118,7 +120,7 @@ public class Spanning_Tree_Service {
 			}
 		}
 		
-		return new Spanning_Tree(res_node_id, res_distance);
+		return new Spanning_Tree(total_distance, res_node_id, res_distance);
 	}
 
 }

@@ -9,6 +9,7 @@ import Models.Spanning_Tree;
 import Services.Spanning_Tree_Service;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -44,6 +45,8 @@ public class Spanning_Tree_Panel extends JPanel {
 						System.out.print(dis[i][j]+"----");
 					System.out.println();
 				}
+				
+				JOptionPane.showMessageDialog(null,"Total distance: "+ Math.round(Statics.current_spanning_tree.getTotal_distance()));
 				
 				Main_Window.Drawing_Panel.repaint();
 			}

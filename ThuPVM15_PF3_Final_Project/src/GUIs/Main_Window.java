@@ -29,7 +29,6 @@ public class Main_Window {
 	private JPanel Element_Panel;
 	private JPanel Shortest_Path_Panel;
 	private JPanel Spanning_Tree_Panel;
-	private JPanel Finish_Action_Panel;
 	private JPanel Control_Panel;
 	private JMenuBar menuBar;
 	private JMenu mnNewMenu;
@@ -50,7 +49,7 @@ public class Main_Window {
 		frame = new JFrame();
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setBounds(100, 100, screenSize.width-30, screenSize.height-20);
+		frame.setBounds(100, 100, screenSize.width-50, screenSize.height-50);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		frame.setLocationRelativeTo(null);
@@ -71,12 +70,6 @@ public class Main_Window {
 		Spanning_Tree_Panel = new Spanning_Tree_Panel();
 		
 		Control_Panel.add(Spanning_Tree_Panel);
-		
-		JPanel null_panel = new JPanel();
-		Control_Panel.add(null_panel);
-		
-		Finish_Action_Panel = new Finish_Action_Panel();
-		Control_Panel.add(Finish_Action_Panel);
 		
 		menuBar = new JMenuBar();
 		frame.getContentPane().add(menuBar, BorderLayout.NORTH);
