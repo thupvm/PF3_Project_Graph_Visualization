@@ -10,6 +10,7 @@ public class Start_Class {
 			public void run() {
 				try {
 					Main_Window window = Statics.main_window;
+					window.getFrame().setTitle("Network Simulation Application");
 					window.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
